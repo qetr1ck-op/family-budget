@@ -1,3 +1,6 @@
+import LogRocket from 'logrocket';
+LogRocket.init('sasttx/famili-budget');
+
 import { logService } from './../../services/log.service';
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { googleSheet } from '../../services/google-sheet.service';
