@@ -1,5 +1,4 @@
 import LogRocket from 'logrocket';
-LogRocket.init('sasttx/famili-budget');
 
 import { logService } from './../../services/log.service';
 import { VercelRequest, VercelResponse } from '@vercel/node';
@@ -7,6 +6,8 @@ import { googleSheet } from '../../services/google-sheet.service';
 import { monoParserService, MonoTransactionRequest } from '../../services/mono-parser.service';
 
 export default async (request: VercelRequest, response: VercelResponse) => {
+  LogRocket.init('sasttx/famili-budget');
+
   const payload: MonoTransactionRequest = request.body;
 
   logService.log(`Incoming request`);
