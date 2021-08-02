@@ -1,18 +1,19 @@
 import { logService } from './../../services/log.service';
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { googleSheet } from '../../services/google-sheet.service';
-import { monoParserService } from '../../services/mono-parser.service';
+import { monoParserService, MonoTransactionRequest } from '../../services/mono-parser.service';
 
 export default async (request: VercelRequest, response: VercelResponse) => {
+  const payload: MonoTransactionRequest = request.body;
+
   logService.log(`Incoming request`);
   logService.log(`Method: ${request.method}`);
-  logService.log(`Payload: ${JSON.stringify(request.body, null, 2)}`);
+  logService.log(`Payload: ${JSON.stringify(payload, null, 2)}`);
 
   try {
     await googleSheet.auth();
 
-    const transaction = monoParserService.toTransaction(request.body.data.statementItem);
+    const transaction = monoParserService.toTransaction(payload.data.statementItem);
 
     logService.log(`Publish data:`);
     logService.log(transaction);

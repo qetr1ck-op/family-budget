@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export interface Transaction {
   [key: string]: string | number;
   id: string;
@@ -32,7 +34,7 @@ export interface MonoTransaction {
 }
 
 const toTransactionDate = (date: Date): string => {
-  return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+  return dayjs(date).format('DD.MM.YYYY');
 };
 
 const toTransactionMonthIndex = (date: Date): number => {
