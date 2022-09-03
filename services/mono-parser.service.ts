@@ -56,7 +56,7 @@ const toDateFromSeconds = (seconds: number): Date => {
   return new Date(seconds * 1000);
 };
 
-const toTransaction = (transaction: MonoTransaction): Transaction => {
+const parseTransaction = (transaction: MonoTransaction): Transaction => {
   const date = toDateFromSeconds(transaction.time);
 
   return {
@@ -68,6 +68,9 @@ const toTransaction = (transaction: MonoTransaction): Transaction => {
   };
 };
 
+const isIncomingTransaction = (transaction: MonoTransaction): boolean => transaction.amount > 0;
+
 export const monoParserService = {
-  toTransaction,
+  parseTransaction,
+  isIncomingTransaction,
 };
